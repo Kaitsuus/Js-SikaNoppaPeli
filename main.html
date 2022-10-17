@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/main.min.css">
+    <title>Document</title>
+</head>
+<body>
+    <h2 id="vuoro">Pelaaja #1 vuoro</h2>
+    <img src="d1.gif" name="mydice" id="noppa">
+    <img src="d1.gif" name="mydice2" id="noppa2">
+    <div class="containerNopat">
+        <input type="button" id="lopeta" value="lopetaVuoro" onclick="lisaaPisteet()"></input>
+        <input type="button" id="nopat" value="heita" onclick="heita();"></input>
+        
+    </div>
+    <div id="playerOneScore">
+        <p id="pOs">Pelaaja yksi SCORE: 0</p>
+    </div>
+
+    <div id="playerTwoScore">
+        <p id="pTs">pelaaja kaksi SCORE: 0</p>
+    </div>
+
+    <div class="pelaajaMaara">
+        <button id="yksiPelaaja">Yski Pelaaja</button>
+        <button id="kaksiPelaaja">Kaksi Pelaajaa</button>
+    </div>
+
+    <div class="noppienMaara">
+        <button id="yksiNoppa">Yksi Noppa</button>
+        <button id="kaksiNoppa">Kaksi Noppaa</button>
+    </div>
+
+    <div class="tulos">
+        <label for="maxNumero" id="tahanAsti">Mihin asti pelataan</label>
+        <input type="number" id="maxNumero">
+        <input type="button" value="maxNumero" id="value">
+    </div>
+    <div class="voitto">
+        <input type="button" id="uudelleen" value="Pelaa uudelleen" onclick="uusiPeli();"></input>
+        <h1 id="voittaja"></h1>
+        <p id="pOne"></p>
+        <p id="pTwo"></p>
+    </div>
+
+
+    <footer>
+        <div>
+            Copyright &copy; 2022 <span>Kai Jukarainen</span>
+        </div>
+    </footer>
+    <script src="main.js"></script>
+</body>
+</html>
