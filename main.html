@@ -27,6 +27,8 @@
     <div class="pelaajaMaara">
         <button id="yksiPelaaja">Yski Pelaaja</button>
         <button id="kaksiPelaaja">Kaksi Pelaajaa</button>
+        <input type="text" id="pelaajaYksi">
+        <input type="text" id="pelaajaKaksi">
     </div>
 
     <div class="noppienMaara">
@@ -35,9 +37,9 @@
     </div>
 
     <div class="tulos">
-        <label for="maxNumero" id="tahanAsti">Mihin asti pelataan</label>
         <input type="number" id="maxNumero">
-        <input type="button" value="maxNumero" id="value">
+        <input type="button" value="Mihin asti pelataan" id="value">
+        <p id="tahanAsti"></p>
     </div>
     <div class="voitto">
         <input type="button" id="uudelleen" value="Pelaa uudelleen" onclick="uusiPeli();"></input>

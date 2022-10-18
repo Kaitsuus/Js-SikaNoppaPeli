@@ -5,17 +5,30 @@ let x = 2;
 let maxScore = 0;
 let player1Wins = 0;
 let player2Wins = 0;
+let tuplat = 0;
+let pelaaja1Nimi = ''
+let pelaaja2Nimi = ''
 
 // Pelaajien määrä //
 
 let pelaaja1 = document.getElementById('yksiPelaaja').addEventListener('click',function (){
     pelaaja1 = true;
+    pelaaja1Nimi = document.getElementById('pelaajaYksi').value
     document.getElementById('kaksiPelaaja').style.visibility='hidden';
+    document.getElementById('pelaajaYksi').style.visibility='hidden';
+    document.getElementById('pelaajaKaksi').style.visibility='hidden';
     console.log(pelaaja1)
+    document.getElementById('pOs').innerHTML = pelaaja1Nimi + ' SCORE: 0';
 })
 let pelaaja2 = document.getElementById('kaksiPelaaja').addEventListener('click',function (){
     pelaaja2 = true;
+    pelaaja2Nimi = document.getElementById('pelaajaKaksi').value
+    pelaaja1Nimi = document.getElementById('pelaajaYksi').value
     document.getElementById('yksiPelaaja').style.visibility='hidden';
+    document.getElementById('pelaajaKaksi').style.visibility='hidden';
+    document.getElementById('pelaajaYksi').style.visibility='hidden';
+    document.getElementById('pTs').innerHTML = pelaaja2Nimi + ' SCORE: 0';
+    document.getElementById('pOs').innerHTML = pelaaja1Nimi + ' SCORE: 0';
     console.log(pelaaja2)
 })
 
@@ -41,6 +54,7 @@ let mx = document.getElementById('value').addEventListener('click',function (){
     document.getElementById('tahanAsti').innerHTML='Mihin asti pelataan: ' + maxScore;
     console.log(maxScore)
 })
+
 
 // Nopat // 
 let nopat = new Array();
@@ -77,6 +91,7 @@ function heita(){
     if (score1 < maxScore || score2 < maxScore){
         if (noppa2 === true){
             if (pelaaja1 === true || pelaaja2 === true){
+                document.getElementById('voittaja').innerHTML=''
                 let random=Math.round(Math.random()*5)
                 document.getElementById('noppa').src = nopat[random].src;
                 console.log(nopat[random])
@@ -88,16 +103,24 @@ function heita(){
                 console.log(yht)
                 if (random == 0 || random2 == 0){
                     tulos = 0;
-                    return lisaaPisteet()
+                    tuplat = 0;
+                    return lisaaPisteet();
                 }
                 if (random === random2){
                     tulos += yht2;
+                    tuplat++;
                 }
                 if(random == 0 && random2 == 0){
                     tulos += 25;
                 }
                 if(random != random2){
                     tulos += yht;
+                    tuplat = 0;
+                }
+                if(tuplat == 3){
+                    tulos = 0;
+                    tuplat = 0;
+                    return lisaaPisteet();
                 }
             }
         }
@@ -118,9 +141,11 @@ function heita(){
     }
     if (score1 >= maxScore){
         tulos = 0;
+        return uusiPeli()
     }
     if (score2 >= maxScore){
         tulos = 0;
+        return uusiPeli()
     }
 
 }
@@ -129,33 +154,33 @@ function heita(){
 function lisaaPisteet(){
     if (pelaaja2 === true){
         if (x % 2 == 0){
-        document.getElementById('pOs').innerHTML = 'Pelaaja yksi SCORE: ' + (score1 + tulos);
+        document.getElementById('pOs').innerHTML = pelaaja1Nimi + ' SCORE: ' + (score1 + tulos);
         score1 = score1 + tulos;
         x++
-        document.getElementById('vuoro').innerHTML = 'Pelaaja #2 vuoro'
+        document.getElementById('vuoro').innerHTML = 'Pelaaja ' + pelaaja2Nimi + ' vuoro'
         tulos = 0;
         }else{
-        document.getElementById('pTs').innerHTML = 'Pelaaja kaksi SCORE: ' + (score2 + tulos);
+        document.getElementById('pTs').innerHTML = pelaaja2Nimi + ' SCORE: ' + (score2 + tulos);
         score2 = score2 + tulos;
         x++
-        document.getElementById('vuoro').innerHTML = 'Pelaaja #1 vuoro'
+        document.getElementById('vuoro').innerHTML = 'Pelaaja ' + pelaaja1Nimi + ' vuoro'
         tulos = 0;
         }
     }
     if (pelaaja1 === true){
-        document.getElementById('pOs').innerHTML = 'Pelaaja yksi SCORE: ' + (score1 + tulos);
+        document.getElementById('pOs').innerHTML = pelaaja1Nimi + ' SCORE: ' + (score1 + tulos);
         score1 = score1 + tulos;
         tulos = 0;
     }
     if (score1 >= maxScore){
-        document.getElementById('voittaja').innerHTML='PELAAJA1 VOITTO!'
+        document.getElementById('voittaja').innerHTML='PELAAJA ' + pelaaja1Nimi + ' VOITTI!'
         player1Wins++;
-        document.getElementById('pOne').innerHTML = 'Pelaaja yksi voitot: ' + (player1Wins);
+        document.getElementById('pOne').innerHTML = 'Pelaaja ' + pelaaja1Nimi + ' voitot: ' + (player1Wins);
     }
     if (score2 >= maxScore){
-        document.getElementById('voittaja').innerHTML='PELAAJA2 VOITTO!'
+        document.getElementById('voittaja').innerHTML='PELAAJA ' + pelaaja2Nimi + ' VOITTI!'
         player2Wins++;
-        document.getElementById('pTwo').innerHTML = 'Pelaaja yksi voitot: ' + (player2Wins);
+        document.getElementById('pTwo').innerHTML = 'Pelaaja ' + pelaaja2Nimi + ' voitot: ' + (player2Wins);
     }
 }
 
@@ -164,9 +189,9 @@ function uusiPeli(){
     score2 = 0;
     tulos = 0;
     x = 2;
-    document.getElementById('pOs').innerHTML = 'SCORE: 0';
-    document.getElementById('pTs').innerHTML = 'SCORE: 0';
-    document.getElementById('vuoro').innerHTML = 'Pelaaja #1 vuoro'
+    document.getElementById('pOs').innerHTML = pelaaja1Nimi + ' SCORE: 0';
+    document.getElementById('pTs').innerHTML = pelaaja2Nimi + ' SCORE: 0';
+    document.getElementById('vuoro').innerHTML = 'Pelaaja ' + pelaaja1Nimi + ' vuoro'
 
 }
 
